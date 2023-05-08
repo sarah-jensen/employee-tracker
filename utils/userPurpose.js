@@ -1,3 +1,11 @@
+const {  
+    addDept,
+    addRole,
+    addEmployee,
+    updateField,
+    deleteField,
+} = require('./utils/changeData.js')
+
 function viewData() {
     inquirer.prompt([
     {   name: "viewChoice",
@@ -20,9 +28,43 @@ function viewData() {
     },
     ]).then((userView) => {
         console.log(userView);
-        });
-    };
-
+        switch (userView) {
+            case "viewDepartments":
+                //Query database for departments
+                employeeDb.query("SELECT * FROM departments", (err) => {
+                  if (err) {
+                       console.log('Error retrieving departments');
+                  }
+                });
+                break; 
+              case "viewRoles":
+              //Query database for roles
+                employeeDb.query("SELECT * FROM roles", (err) => {
+                  if (err) {
+                  console.log('Error retrieving roles');
+                  }
+                });
+                break;
+              case "viewEmployees":
+              //Query database for employees
+                employeeDb.query("SELECT * FROM employees", (err) => {
+                  if (err) {
+                  console.log('Error retrieving employees');
+                  }
+                });
+                break;
+              // case "viewBudget":
+              // //Query database for budget
+              // employeeDb.query('SELECT * FROM employees', (err) => {
+              //   if (err) {
+              //     console.log('Error retrieving employees');
+              //   }
+              // });
+              default: 
+                console.log("Error viewing data");
+        };
+    });
+};
 
 function addData() {
     inquirer.prompt([
@@ -43,6 +85,20 @@ function addData() {
         },
     ]).then((userAdd) => {
         console.log(userAdd);
+        switch (userAdd) {
+            case "addDepartment":
+                addDept();
+                break;
+            case "addRole":
+                addRole();
+                break;
+            case "addEmployee":
+                addEmployee();
+                break;
+            default:
+                console.log("Error adding data");
+                
+        }
     });
 };
 
@@ -87,7 +143,12 @@ function deleteData() {
     });
 };
 
-
+module.exports = { 
+    viewData,
+    addData,
+    updateData,
+    deleteData,
+};
 // }
 
 
