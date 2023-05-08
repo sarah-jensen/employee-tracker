@@ -1,5 +1,10 @@
 const inquirer = require('inquirer');
 const employeeDb = require('./connection/connection');
+const { viewData,
+        addData,
+        updateData,
+        deleteData,
+      } = require('./utils/userPurpose.js');
 
 
 //Function to initialize app and display menu
@@ -10,35 +15,35 @@ async function trackerInit() {
       type: 'list',
       choices: [
           { name: "View",
-            value: "VIEW_DATA",
+            value: "viewData",
           },
           {
             name: "Add",
-            value: "ADD_DATA",
+            value: "addData",
           },
           {
             name: "Update",
-            value: "UDPATE_DATA",
+            value: "updateData",
           },
           {
             name: "Delete",
-            value: "DELETE_DATA",
+            value: "deleteData",
           },
         ],
       },
       ]).then((userPurpose) => {
         console.log(userPurpose);
         switch (userPurpose) {
-          case "View":
+          case "viewData":
             viewData();
             break;
-          case "Add":
+          case "addData":
             addData();
             break;
-          case "Update":
+          case "updateData":
             updateData();
             break;
-          case "Delete":
+          case "deleteData":
             deleteData();
             break;
           default:
