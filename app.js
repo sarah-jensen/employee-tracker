@@ -2,11 +2,9 @@ const inquirer = require('inquirer');
 const employeeDb = require('./connection/connection');
 
 
-
-
 //Function to initialize app and display menu
-function trackerInit() {
-  inquirer.prompt([
+async function trackerInit() {
+  await inquirer.prompt([
     { name: "purpose",
       message: "What would you like to do?",
       type: 'list',
@@ -33,12 +31,22 @@ function trackerInit() {
         switch (userPurpose) {
           case "View":
             viewData();
-            
+            break;
+          case "Add":
+            addData();
+            break;
+          case "Update":
+            updateData();
+            break;
+          case "Delete":
+            deleteData();
+            break;
+          default:
+            console.log("Error, please try again");           
         }
       });
-    };
+  };
             
-
   trackerInit();
     
     
