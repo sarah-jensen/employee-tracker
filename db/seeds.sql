@@ -1,4 +1,4 @@
-INSERT INTO department (id, name)
+INSERT INTO departments (id, name)
 VALUES (1, "Royalty"),
         (2, "Nobility"),
         (3, "Maia"),
@@ -6,7 +6,7 @@ VALUES (1, "Royalty"),
         (5, "Common Folk"),
         (6, "Creatures");
 
-INSERT INTO role (id, title, salary, department_id)
+INSERT INTO roles (id, title, salary, department_id)
 VALUES (01, "King", 100, 1),
         (02, "Steward", 95, 2),
         (03, "Lord", 90, 2),
@@ -20,7 +20,7 @@ VALUES (01, "King", 100, 1),
         (11, "Trouble Maker", 30, 5),
         (12, "Ent", 40, 6);
 
-INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
+INSERT INTO employees (id, first_name, last_name, role_id, manager_id)
 VALUES (001, "Gandalf", "Stormcrow", 04, 014),
         (002, "Frodo", "Baggins", 08),
         (003, "Aragorn", "son of Arathorn", 01)
