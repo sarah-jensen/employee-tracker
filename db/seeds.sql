@@ -1,39 +1,39 @@
-INSERT INTO departments (id, name)
-VALUES (1, "Royalty"),
-        (2, "Nobility"),
-        (3, "Maia"),
-        (4, "Military"),
-        (5, "Common Folk"),
-        (6, "Creatures");
+INSERT INTO departments (name)
+VALUES ("Royalty"),
+        ("Nobility"),
+        ("Maia"),
+        ("Military"),
+        ("Common Folk"),
+        ("Creatures");
 
-INSERT INTO roles (id, title, salary, department_id)
-VALUES (01, "King", 100, 1),
-        (02, "Steward", 95, 2),
-        (03, "Lord", 90, 2),
-        (04, "Lady", 90, 2),
-        (05, "Wizard", 80, 3),
-        (06, "Soldier", 60, 4),
-        (07, "Archer", 60, 4),
-        (08, "Inn Keeper", 50, 5),
-        (09, "Ring Bearer", 50, 5),
-        (10, "Gardener", 40, 5),
-        (11, "Trouble Maker", 30, 5),
-        (12, "Ent", 40, 6);
+INSERT INTO roles (title, salary, department_id)
+VALUES ("King", 100, 1),
+        ("Steward", 95, 2),
+        ("Lord", 90, 2),
+        ("Lady", 90, 2),
+        ("Wizard", 80, 3),
+        ("Soldier", 60, 4),
+        ("Archer", 60, 4),
+        ("Inn Keeper", 50, 5),
+        ("Ring Bearer", 50, 5),
+        ("Gardener", 40, 5),
+        ("Trouble Maker", 30, 5),
+        ("Ent", 40, 6);
 
-INSERT INTO employees (id, first_name, last_name, role_id, manager_id)
-VALUES (001, "Gandalf", "Stormcrow", 04, 014),
-        (002, "Frodo", "Baggins", 08),
-        (003, "Aragorn", "son of Arathorn", 01)
-        (003, "Meriadoc", "Brandywine", 10, 001),
-        (004, "Peregrin", "Took", 10, 001),
-        (005, "Samwise", "Gamgee" 09, 002),
-        (006, "Boromir", "son of Denethor", 05, 003),
-        (007, "Legolas", "of the Woodland Realm", 06, 003),
-        (008, "Gimli", "son of Gloin", 05, 003),
-        (009, "Denethor", "son of Excelion", 02),
-        (010, "Theoden", "king of Rohan", 01),
-        (011, "Eowen", "Shieldmaiden", 04, 010),
-        (012, "Eomer", "Rohirrim", 05, 010),
-        (013, "Treebeard", "Treeherder", 12),
-        (014, "Saruman", "the white", 05, 015),
-        (015, "Sauron", "Fire-eye", 05);
+INSERT INTO employees (first_name, last_name, role_id, manager_id)
+VALUES ("Gandalf", "Stormcrow", 04, 014),
+        ("Frodo", "Baggins", 08, 001),
+        ("Aragorn", "son of Arathorn", 01, 002),
+        ("Meriadoc", "Brandywine", 10, 001),
+        ("Peregrin", "Took", 10, 001),
+        ("Samwise", "Gamgee", 09, 002),
+        ("Boromir", "son of Denethor", 05, 003),
+        ("Legolas", "of the Woodland Realm", 06, 003),
+        ("Gimli", "son of Gloin", 05, 003),
+        ("Denethor", "son of Excelion", 02, 003),
+        ("Theoden", "king of Rohan", 01, 011),
+        ("Eowen", "Shieldmaiden", 04, 010),
+        ("Eomer", "Rohirrim", 05, 010),
+        ("Treebeard", "Treeherder", 12, 014),
+        ("Saruman", "the white", 05, 015),
+        ("Sauron", "Fire-eye", 05, 016);

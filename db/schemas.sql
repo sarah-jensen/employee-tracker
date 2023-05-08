@@ -28,3 +28,4 @@ CREATE TABLE employees (
     FOREIGN KEY (role_id) REFERENCES roles(id)
     -- can/should I add a foreign key to reference the manager? would this be a role id or an employee id?
 );
+

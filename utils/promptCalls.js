@@ -5,16 +5,16 @@ function viewData() {
         type: "list",
         choices: [
             {   name: "All departments",
-                value: "VIEW_DEPARTMENTS",
+                value: "viewDepartments",
             },
             {   name: "All roles",
-                value: "VIEW_ROLES",
+                value: "viewRoles",
             },
             {   name: "All employees",
-                value: "VIEW_EMPLOYEES",
+                value: "viewEmployees",
             },
             {   name: "Utilization budget",
-                value: "VIEW_BUDGET",
+                value: "viewBudget",
             },
         ],
     },
@@ -22,26 +22,78 @@ function viewData() {
         console.log(userView);
         });
     };
+
+
+function addData() {
+    inquirer.prompt([
+        {   name: "addColumn",
+            message: "Which field would you like to add?",
+            type: "list",
+            choices: [
+                {   name: "Add a department",
+                    value: "addDepartment",
+                },
+                {   name: "Add a role",
+                    value: "addRole",
+                },
+                {   name: "Add an employee",
+                    value: "addEmployee",
+                },
+            ]
+        },
+    ]).then((userAdd) => {
+        console.log(userAdd);
+    });
+};
+
+function updateData() {
+    inquirer.prompt([
+        {   name: "updateValue",
+            message: "Which field would you like to update?",
+            type: "list",
+            choices: [
+                {   name: "Employee role",
+                    value: "updateEmRole",
+                },
+                {   name: "Employee manager",
+                    value: "updateEmManager",
+                },
+            ]
+        }
+    ]).then((userUpdate) => {
+        console.log(userUpdate);
+    });
+};
+
+function deleteData() {
+    inquirer.prompt([
+        {   name: "deleteValue",
+            message: "Which field would you like to delete?",
+            type: "list",
+            choices: [
+                {   name: "Delete department",
+                    value: "deleteDept",
+                },
+                {   name: "Delete manager",
+                    value: "deleteManager",
+                },
+                {   name: "Delete employee",
+                    value: "deleteEmployee",
+                },
+            ]
+        }
+    ]).then((userDelete) => {
+        console.log(userDelete);
+    });
+};
+
+
 // }
 
-// view Choices
 
 
-// async function trackerInit() {
-//     await inquirer.prompt([
-//         { name: "purpose",
-//           message: "What would you like to do?",
-//           type: 'tree',
-//           tree: [
-//             { value: "View",
-//               open: false,
-//               children: [
-//                 {value: "View all departments"},
-//                 {value: "View all roles"},
-//                 {value: "View all employees"},
-//                 {value: "View budget"},
-//               ]
-//             },
+
+
 //             { value: "Add",
 //               open: false,
 //               children: [
