@@ -1,3 +1,5 @@
+const inquirer = require("inquirer");
+
 function addData() {
     inquirer.prompt([
         {   name: "addColumn",

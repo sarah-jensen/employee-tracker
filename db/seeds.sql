@@ -22,7 +22,7 @@ VALUES ("King", 100, 1),
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
 VALUES ("Gandalf", "Stormcrow", 04, 014),
-        ("Frodo", "Baggins", 08, 001),
+        ("Frodo", "Baggins", 08, NULL),
         ("Aragorn", "son of Arathorn", 01, 002),
         ("Meriadoc", "Brandywine", 10, 001),
         ("Peregrin", "Took", 10, 001),
