@@ -1,10 +1,26 @@
 const inquirer = require('inquirer');
 const employeeDb = require('./connection/connection');
 const { viewData,
-        addData,
-        updateData,
-        deleteData,
-      } = require('./utils/userPurpose.js');
+      } = require('./utils/viewData.js');
+const {
+  updateData,
+  updateEmRole,
+  updateEmManager,
+} = require('./utils/updateData.js');
+const {  
+  addData,
+  addDept,
+  addRole,
+  addEmployee,
+} = require('./utils/addData.js');
+const {
+  deleteData,
+  deleteDept,
+  deleteManager,
+  deleteEmployee,
+} = require('./utils/deleteData.js');
+
+
 
 
 //Function to initialize app and display menu
@@ -32,8 +48,8 @@ async function trackerInit() {
         ],
       },
       ]).then((userPurpose) => {
-        console.log(userPurpose);
-        switch (userPurpose) {
+        console.log(userPurpose.purpose);
+        switch (userPurpose.purpose) {
           case "viewData":
             viewData();
             break;
