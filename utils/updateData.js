@@ -1,3 +1,5 @@
+const inquirer = require("inquirer");
+
 function updateData() {
     inquirer.prompt([
         {   name: "updateValue",

@@ -1,3 +1,4 @@
+const inquirer = require("inquirer");
 
 function viewData() {
     inquirer.prompt([
@@ -20,11 +21,10 @@ function viewData() {
         ],
     },
     ]).then((userView) => {
-        console.log(userView);
         switch (userView) {
             case "viewDepartments":
                 //Query database for departments
-                employeeDb.query("SELECT * FROM departments", (err) => {
+                employeeDb.query("SELECT * FROM departments", values, (err) => {
                   if (err) {
                        console.log('Error retrieving departments');
                   }
