@@ -2,17 +2,17 @@ const inquirer = require('inquirer');
 const employeeDb = require('./connection/connection');
 const { viewData,
       } = require('./utils/viewData.js');
+      const {  
+        addData,
+        addDept,
+        addRole,
+        addEmployee,
+      } = require('./utils/addData.js');
 const {
   updateData,
   updateEmRole,
   updateEmManager,
 } = require('./utils/updateData.js');
-const {  
-  addData,
-  addDept,
-  addRole,
-  addEmployee,
-} = require('./utils/addData.js');
 const {
   deleteData,
   deleteDept,
