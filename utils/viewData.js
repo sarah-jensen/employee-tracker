@@ -1,20 +1,3 @@
-const {
-    updateData,
-    updateEmRole,
-    updateEmManager,
-  } = require('./utils/updateData.js');
-  const {  
-    addData,
-    addDept,
-    addRole,
-    addEmployee,
-  } = require('./utils/addData.js');
-  const {
-    deleteData,
-    deleteDept,
-    deleteManager,
-    deleteEmployee,
-  } = require('./utils/deleteData.js');
 
 function viewData() {
     inquirer.prompt([
