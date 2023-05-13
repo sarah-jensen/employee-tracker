@@ -1,26 +1,32 @@
 const inquirer = require("inquirer");
 const employeeDb = require("./connection/connection");
-const { viewData } = require("./utils/viewData.js");
+const { 
+  displayDepartments,
+  displayRoles,
+  displayEmployees } = require("./helpers/viewData");
 const {
   addData,
   addDept,
   addRole,
   addEmployee,
-} = require("./utils/addData.js");
+} = require("./helpers/addData.js");
 const {
   updateData,
   updateEmRole,
   updateEmManager,
-} = require("./utils/updateData.js");
+} = require("./helpers/updateData.js");
 const {
   deleteData,
   deleteDept,
   deleteManager,
   deleteEmployee,
-} = require("./utils/deleteData.js");
+} = require("./helpers/deleteData.js");
+
+
+
 
 //Function to initialize app and display menu
-function trackerInit() {
+async function trackerInit() {
   console.log('get started');
   inquirer.prompt([
       {
@@ -28,7 +34,9 @@ function trackerInit() {
         message: "What would you like to do?",
         type: "list",
         choices: [
-          { name: "View", value: "viewData" },
+          { name: "View", 
+            value: "viewData" 
+          },
           {
             name: "Add",
             value: "addData",
@@ -38,8 +46,8 @@ function trackerInit() {
             value: "updateData",
           },
           {
-            name: "Delete",
-            value: "deleteData",
+            name: "Quit",
+            value: "exitDatabase",
           },
         ],
       },
@@ -47,7 +55,42 @@ function trackerInit() {
     .then((userPurpose) => {
       switch (userPurpose.purpose) {
         case "viewData":
-          viewData();
+          inquirer.prompt([
+            {
+              name: "view",
+              message: "What would you like to view?",
+              type: "list",
+              choices: [
+                {
+                  name: "All Departments",
+                  value: "allDepts" 
+               },
+               {
+                  name: "All Roles",
+                  value: "allRoles"
+               },
+               {
+                  name: "All Employees",
+                  value: "allEmps"
+               },
+              ],
+            },
+          ]).then((userView) => {
+            switch (userView.view) {
+              case "allDepts":
+                displayDepartments();
+                return trackerInit();
+              case "allRoles":
+                displayRoles()
+                return trackerInit();
+              case "allEmps":
+                displayEmployees()
+                return trackerInit();
+              default: 
+                console.log("Error processing view request");
+                return trackerInit();
+            };
+          });
           break;
         case "addData":
           addData();
@@ -55,11 +98,10 @@ function trackerInit() {
         case "updateData":
           updateData();
           break;
-        case "deleteData":
-          deleteData();
-          break;
-        default:
-          console.log("Error, please try again");
+        case "exitDatabase":
+          process.exit();
+        // default:
+        //   console.log("Error, please try again");
       }
     });
 }
