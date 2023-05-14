@@ -1,111 +1,99 @@
 const inquirer = require("inquirer");
+const employeeDb = require('../connection/connection.js');
 
-function addData() {
-    inquirer.prompt([
-        {   name: "addColumn",
-            message: "Which field would you like to add?",
-            type: "list",
-            choices: [
-                {   name: "Add a department",
-                    value: "addDepartment",
-                },
-                {   name: "Add a role",
-                    value: "addRole",
-                },
-                {   name: "Add an employee",
-                    value: "addEmployee",
-                },
-            ],
-        },
-    ]).then((userAdd) => {
-        console.log(userAdd);
-        switch (userAdd) {
-            case "addDepartment":
-                addDept();
-                break;
-            case "addRole":
-                addRole();
-                break;
-            case "addEmployee":
-                addEmployee();
-                break;
-            default:
-                console.log("Error adding data");
-                
-        };
+
+//add a Department
+async function addDepartment() {
+  try {
+    await inquirer.prompt([
+      {
+        name: "deptName",
+        message: "Enter new department name",
+        type: "input"
+      }
+    ]).then(async (newDept) => {     
+        let sql = `INSERT INTO department (name) VALUES ('${newDept.deptName}');`
+        employeeDb.promise().query(sql);
+            console.log('Department added successfully');
+            
     });
-};
-
-function addDept() {
-    inquirer.prompt([
-        {   name: "departmentName",
-            message: "Enter a name for the department",
-            type: "input",
+  } catch (error) {
+      console.log('Error adding department', error)
+      return null;
+    }
+  };
+ 
+  
+  //add a Role
+  async function addRole() {
+    try {
+      await inquirer.prompt([
+        {
+          name: "title",
+          message: "Enter new role title",
+          type: "input"
         },
-    ]).then((newDept) => {
-        employeeDb.query( "INSERT INTO departments (" + newDept + ")", (err) => {
-            if (err) {
-                console.log('Error adding department');
-            }
-        });
-    });
-};
-
-function addRole() {
-    inquirer.prompt([
-        {   name: "roleTitle",
-            message: "Enter a title for the role",
-            type: "input",
+        {
+          name: "salary",
+          message: "Enter salary",
+          type: "number"
         },
-        {   name: "roleSalary",
-            message: "Enter a salary",
-            type: "number",
+        {
+          name: "department_id",
+          message: "Enter the department_id",
+          type: "number"
         },
-        {   name: "roleDept",
-            message: "Enter the department_id",
-            input: "number"
+      ]).then(async (newRole) => {     
+          let sql = `INSERT INTO role (title, salary, department_id) VALUES ('${newRole.title}', '${newRole.salary}', '${newRole.department_id}');`
+          employeeDb.promise().query(sql);
+              console.log('Role added successfully');
+              
+      });
+    } catch (error) {
+        console.log('Error adding role', error)
+        return null;
+      }
+  };
+  
+  //add an Employee
+  async function addEmployee() {
+    try {
+      await inquirer.prompt([
+        {
+          name: "first_name",
+          message: "Enter first name",
+          type: "input"
         },
-    ]).then((newRole) => {
-        employeeDb.query("INSERT INTO roles (" + newRole.roleTitle + ", " + newRole.roleSalary + ", " + newRole.roleDept + ")", (err) => {
-            if(err) {
-                console.log("Error adding role");
-            };
-        });
-    });
-};
-
-function addEmployee() {
-    inquirer.prompt([
-        {   name: "empFirstName",
-            message: "Enter employee first name",
-            type: "input",
+        {
+          name: "last_name",
+          message: "Enter last name",
+          type: "input"
         },
-        {   name: "empLastName",
-            message: "Enter employee last name",
-            type: "input",
+        {
+          name: "role_id",
+          message: "Enter the role_id",
+          type: "number"
         },
-        {   name: "empRole",
-            message: "Enter the role_id",
-            input: "number"
+        {
+          name: "manager_id",
+          message: "Enter the manager_id",
+          type: "number"
         },
-        {   name: "empManager",
-            message: "Enter the manager_id",
-            input: "number",
-        },
-    ]).then((newEmployee) => {
-        employeeDb.query("INSERT INTO employees (" + newEmployee.empFirstName + ", " + newEmployee.empLastName + ", " + newEmployee.empRole + ", " + newEmployee.empManager + ")", (err) => {
-            if(err) {
-                console.log("Error adding employee");
-            };
-        });
-    });
-};
-
+      ]).then(async (newEmployee) => {     
+          let sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ('${newEmployee.first_name}', '${newEmployee.last_name}', '${newEmployee.role_id}', '${newEmployee.manager_id}');`
+          employeeDb.promise().query(sql);
+              console.log('Employee added successfully');
+              
+      });
+    } catch (error) {
+        console.log('Error adding employee', error)
+        return null;
+      }
+  };
 
 
 module.exports = {  
-    addData,
-    addDept,
+    addDepartment,
     addRole,
-    addEmployee,
+    addEmployee
 };

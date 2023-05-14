@@ -23,5 +23,6 @@ VALUES  ("Frodo", "Baggins", 1, NULL),
         ("Samwise", "Gamgee", 6, 1),
         ("Boromir", "son of Denethor", 3, 2),
         ("Legolas", "of the Woodland Realm", 4, 2),
-        ("Gimli", "son of Gloin", 5, 2);
+        ("Gimli", "son of Gloin", 5, 2),
+        ("Sauron", "of Mordor", 2, NULL);
       

@@ -3,12 +3,11 @@ const employeeDb = require("./connection/connection");
 const { 
   displayDepartments,
   displayRoles,
-  displayEmployees } = require("./helpers/viewData");
+  displayEmployees } = require("./helpers/viewData.js");
 const {
-  addData,
-  addDept,
+  addDepartment,
   addRole,
-  addEmployee,
+  addEmployee
 } = require("./helpers/addData.js");
 const {
   updateData,
@@ -26,85 +25,72 @@ const {
 
 
 //Function to initialize app and display menu
-async function trackerInit() {
-  console.log('get started');
+function trackerInit() {
   inquirer.prompt([
-      {
-        name: "purpose",
-        message: "What would you like to do?",
-        type: "list",
-        choices: [
-          { name: "View", 
-            value: "viewData" 
-          },
-          {
-            name: "Add",
-            value: "addData",
-          },
-          {
-            name: "Update",
-            value: "updateData",
-          },
-          {
-            name: "Quit",
-            value: "exitDatabase",
-          },
-        ],
-      },
-    ])
-    .then((userPurpose) => {
-      switch (userPurpose.purpose) {
-        case "viewData":
-          inquirer.prompt([
-            {
-              name: "view",
-              message: "What would you like to view?",
-              type: "list",
-              choices: [
-                {
-                  name: "All Departments",
-                  value: "allDepts" 
-               },
-               {
-                  name: "All Roles",
-                  value: "allRoles"
-               },
-               {
-                  name: "All Employees",
-                  value: "allEmps"
-               },
-              ],
-            },
-          ]).then((userView) => {
-            switch (userView.view) {
-              case "allDepts":
-                displayDepartments();
-                return trackerInit();
-              case "allRoles":
-                displayRoles()
-                return trackerInit();
-              case "allEmps":
-                displayEmployees()
-                return trackerInit();
-              default: 
-                console.log("Error processing view request");
-                return trackerInit();
-            };
-          });
-          break;
-        case "addData":
-          addData();
-          break;
-        case "updateData":
-          updateData();
-          break;
-        case "exitDatabase":
+    {
+      name: "purpose",
+      message: "What would you like to do?",
+      type: "list",
+      choices: [
+        "View all departments",
+        "View all roles",
+        "View all Employees", 
+        "Add a department",
+        "Add a role",
+        "Add an employee",
+        "Update a role",
+        "Update an employee",
+        "Quit",   
+        ]
+    }
+  ]).then(async (userResponse) => {
+     switch(userResponse.purpose) {
+        case "View all departments": {
+          let deptTable = await displayDepartments();
+          console.table(deptTable);
+        return trackerInit();
+        }
+        case "View all roles": {
+          let roleTable = await displayRoles()
+          console.table(roleTable);
+          return trackerInit();
+        }
+        case "View all Employees": {
+          let employeeTable = await displayEmployees()
+          console.table(employeeTable);
+          return trackerInit();
+        }
+        case "Add a department": {
+          await addDepartment();
+          console.log('New department added');
+          return trackerInit();
+        }
+        case "Add a role": {
+          await addRole()
+          console.log('New role added');
+          return trackerInit();
+        }
+        case "Add an employee":  {
+          await addEmployee();
+          console.log('New employee added');
+          return trackerInit();
+        }
+        case "Update a role": {
+          await updateRole();
+          console.log('Role updated');
+        }
+        case "Update an employee": {
+          await updateEmployee();
+          console.log('Employee updated');
+        }
+        case "Quit": {
           process.exit();
-        // default:
-        //   console.log("Error, please try again");
       }
-    });
-}
+    };
+  });
+};
+
+
 
 trackerInit();
 
