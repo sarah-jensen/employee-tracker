@@ -1,77 +1,34 @@
 const inquirer = require("inquirer");
+const employeeDb = require('../connection/connection.js');
 
-function updateData() {
-    inquirer.prompt([
-        {   name: "updateValue",
-            message: "Which field would you like to update?",
-            type: "list",
-            choices: [
-                {   name: "Employee role",
-                    value: "updateEmRole",
-                },
-                {   name: "Employee manager",
-                    value: "updateEmManager",
-                },
-            ]
-        }
-    ]).then((userUpdate) => {
-        console.log(userUpdate);
-        switch (userUpdate) {
-            case "updateEmRole":
-                updateEmRole();
-                break;
-            case "updateEmManager":
-                updateEmManager();
-                break;
-            default:
-                console.log("Error updating field");
-        };
-    });
-};
-
-function updateEmRole() {
-    inquirer.prompt([
-        {   name: "emId",
-            message: "Enter employee_id",
-            type: "number",
+async function updateEmployeeRole() {
+    try {
+      await inquirer.prompt([
+        {
+          name: "employee_id",
+          message: "Enter employee_id to update",
+          type: "number"
         },
-        {   name: "roleId",
-            message: "Enter new role_id",
-            type: "number",
+        {
+          name: "new_role_id",
+          message: "Enter new role_id",
+          type: "number"
         },
-    ]).then((newRole) => {
-        console.log(newRole);
-        employeeDb.query("UPDATE employees SET role_id = " + newRole.roleId + " WHERE id = " + newRole.emId + ""), (err) => {
-            if (err) {
-                console.log('Error updating role');
-            }
-        };
-    });
-};
-
-
-function updateEmManager() {
-    inquirer.prompt([
-        {   name: "emId",
-            message: "Enter employee_id",
-            type: "number",
-        },
-        {   name: "managerId",
-            message: "Enter new manager_id",
-            input: "number"
-        },
-    ]).then((newManager) => {
-        console.log(newManager);
-        employeeDb.query("UPDATE employees SET manager_id = " + newManager.managerId + " WHERE id = " + newManager.emId + ""), (err) => {
-            if(err) {
-                console.log('Error updating manager');
-            }
-        };
-    });
-};
+      ]).then(async (updateEmployee) => {     
+          let sql = 
+          `UPDATE employee 
+          SET role_id = '${updateEmployee.new_role_id}' 
+          WHERE id = '${updateEmployee.employee_id}'`
+          employeeDb.promise().query(sql);
+              console.log('Employee role updated successfully');
+              
+      });
+    } catch (error) {
+        console.log('Error updating employee role', error)
+        return null;
+      }
+  };
 
 module.exports = {
-    updateData,
-    updateEmRole,
-    updateEmManager,
+    updateEmployeeRole,
 };

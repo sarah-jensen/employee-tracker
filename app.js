@@ -10,16 +10,8 @@ const {
   addEmployee
 } = require("./helpers/addData.js");
 const {
-  updateData,
-  updateEmRole,
-  updateEmManager,
+  updateEmployeeRole
 } = require("./helpers/updateData.js");
-const {
-  deleteData,
-  deleteDept,
-  deleteManager,
-  deleteEmployee,
-} = require("./helpers/deleteData.js");
 
 
 
@@ -38,8 +30,7 @@ function trackerInit() {
         "Add a department",
         "Add a role",
         "Add an employee",
-        "Update a role",
-        "Update an employee",
+        "Update an employee role",
         "Quit",   
         ]
     }
@@ -62,26 +53,19 @@ function trackerInit() {
         }
         case "Add a department": {
           await addDepartment();
-          console.log('New department added');
           return trackerInit();
         }
         case "Add a role": {
-          await addRole()
-          console.log('New role added');
+          await addRole();
           return trackerInit();
         }
         case "Add an employee":  {
           await addEmployee();
-          console.log('New employee added');
           return trackerInit();
         }
-        case "Update a role": {
-          await updateRole();
-          console.log('Role updated');
-        }
-        case "Update an employee": {
-          await updateEmployee();
-          console.log('Employee updated');
+        case "Update an employee role": {
+          await updateEmployeeRole();
+          return trackerInit();
         }
         case "Quit": {
           process.exit();
@@ -94,6 +78,4 @@ function trackerInit() {
 
 trackerInit();
 
-// (async function init(){
-//   await trackerInit();
-// })();
+
