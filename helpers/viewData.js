@@ -8,9 +8,10 @@ const {
 
 //show all Departments
 async function displayDepartments() {
+  console.log('retrieve');
   try {
     let results = await employeeDb.promise().query(VIEW_DEPARTMENTS);
-    console.table(results[0]);
+    return results[0];
   } catch (error) {
     console.log('Error retrieving departments', error)
     return null;
